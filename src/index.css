@@ -1,0 +1,34 @@
+/* Variables de color personalizadas para la identidad de Felimiau */
+:root {
+  --felimiau-amarillo-suave: #FEF9C3;
+  --felimiau-dorado: #FACC15;
+  --felimiau-dorado-oscuro: #EAB308;
+  --felimiau-oscuro: #1E293B;
+  --felimiau-texto-suave: #475569;
+  --felimiau-fondo: #F8FAFC;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--felimiau-fondo) !important;
+  color: var(--felimiau-oscuro) !important;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--felimiau-fondo);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--felimiau-oscuro);
+}
