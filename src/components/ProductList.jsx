@@ -9,6 +9,7 @@ export const ProductList = ({
   setCountProducts,
   total,
   setTotal,
+  setToastProduct,
 }) => {
   // Estado para el filtro de categorías activo
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todos');
@@ -35,6 +36,12 @@ export const ProductList = ({
 
   // Función para gestionar la adición de productos al carrito sin duplicar
   const onAddProduct = (product) => {
+    // Disparar notificación visual flotante (Toast)
+    if (setToastProduct) {
+      setToastProduct(null);
+      setTimeout(() => setToastProduct(product), 60);
+    }
+
     // 1. Verificación de existencia previa con .find():
     if (allProducts.find((item) => item.id === product.id)) {
       const products = allProducts.map((item) =>

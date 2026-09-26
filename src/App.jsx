@@ -7,6 +7,7 @@ import { ProductList } from './components/ProductList';
 import { Services } from './components/Services';
 import { ContactForm } from './components/ContactForm';
 import { Footer } from './components/Footer';
+import { ToastNotification } from './components/ToastNotification';
 
 function App() {
   // Estado principal del carrito de compras
@@ -17,6 +18,9 @@ function App() {
 
   // Estado del número total de unidades en el carrito
   const [countProducts, setCountProducts] = useState(0);
+
+  // Estado para la notificación Toast flotante de producto añadido
+  const [toastProduct, setToastProduct] = useState(null);
 
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -46,6 +50,7 @@ function App() {
           setTotal={setTotal}
           countProducts={countProducts}
           setCountProducts={setCountProducts}
+          setToastProduct={setToastProduct}
         />
 
         {/* Sección de Servicios y Beneficios de Felimiau */}
@@ -57,6 +62,12 @@ function App() {
 
       {/* 3. Pie de página de Felimiau */}
       <Footer />
+
+      {/* 4. Notificación visual flotante (Toast de Bootstrap) al añadir productos */}
+      <ToastNotification
+        product={toastProduct}
+        onClose={() => setToastProduct(null)}
+      />
     </div>
   );
 }
