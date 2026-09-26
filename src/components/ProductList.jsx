@@ -1,9 +1,31 @@
 import { data } from '../data';
 
-export const ProductList = ({ allProducts, setAllProducts }) => {
-
+export const ProductList = ({
+  allProducts,
+  setAllProducts,
+  countProducts,
+  setCountProducts,
+  total,
+  setTotal,
+}) => {
   const onAddProduct = (product) => {
-    console.log("add", product);
+    // Si el producto ya existe en el carrito, aumentamos su cantidad
+    if (allProducts.find((item) => item.id === product.id)) {
+      const products = allProducts.map((item) =>
+        item.id === product.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+
+      setTotal(total + product.price * product.quantity);
+      setCountProducts(countProducts + product.quantity);
+      return setAllProducts([...products]);
+    }
+
+    // Si no existía en el carrito, lo agregamos por primera vez
+    setTotal(total + product.price * product.quantity);
+    setCountProducts(countProducts + product.quantity);
+    setAllProducts([...allProducts, product]);
   };
 
   return (

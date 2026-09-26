@@ -6,6 +6,7 @@
 // - precioNormal
 // - descripcion
 // - img / imagen
+// - quantity: cantidad inicial (1) para el carrito de compras
 // ==========================================================================
 
 export const data = [
@@ -19,6 +20,7 @@ export const data = [
     precioNormal: 44990,
     precioOferta: 39990,
     price: 39990,
+    quantity: 1,
     img: "/img/rascador.png",
     imagen: "/img/rascador.png"
   },
@@ -32,6 +34,7 @@ export const data = [
     precioNormal: 26990,
     precioOferta: 22990,
     price: 22990,
+    quantity: 1,
     img: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=600&h=350&q=80",
     imagen: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=600&h=350&q=80"
   },
@@ -45,6 +48,7 @@ export const data = [
     precioNormal: 18990,
     precioOferta: 14990,
     price: 14990,
+    quantity: 1,
     img: "https://images.unsplash.com/photo-1561948955-570b270e7c36?auto=format&fit=crop&w=600&h=350&q=80",
     imagen: "https://images.unsplash.com/photo-1561948955-570b270e7c36?auto=format&fit=crop&w=600&h=350&q=80"
   },
@@ -58,6 +62,7 @@ export const data = [
     precioNormal: 23990,
     precioOferta: 18990,
     price: 18990,
+    quantity: 1,
     img: "/img/talia.jpg",
     imagen: "/img/talia.jpg"
   },
@@ -71,6 +76,7 @@ export const data = [
     precioNormal: 24990,
     precioOferta: 19990,
     price: 19990,
+    quantity: 1,
     img: "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=600&h=350&q=80",
     imagen: "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=600&h=350&q=80"
   },
@@ -84,6 +90,7 @@ export const data = [
     precioNormal: 14990,
     precioOferta: 11990,
     price: 11990,
+    quantity: 1,
     img: "https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=600&h=350&q=80",
     imagen: "https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=600&h=350&q=80"
   }
