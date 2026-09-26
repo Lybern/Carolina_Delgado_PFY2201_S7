@@ -31,8 +31,8 @@ export const data = [
     precioOferta: 22990,
     price: 22990,
     quantity: 1,
-    img: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=600&h=350&q=80",
-    imagen: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=600&h=350&q=80"
+    img: "./img/alimento.jpg",
+    imagen: "./img/alimento.jpg"
   },
   {
     id: 3,
@@ -45,8 +45,8 @@ export const data = [
     precioOferta: 14990,
     price: 14990,
     quantity: 1,
-    img: "https://images.unsplash.com/photo-1561948955-570b270e7c36?auto=format&fit=crop&w=600&h=350&q=80",
-    imagen: "https://images.unsplash.com/photo-1561948955-570b270e7c36?auto=format&fit=crop&w=600&h=350&q=80"
+    img: "./img/churu.jpg",
+    imagen: "./img/churu.jpg"
   },
   {
     id: 4,
@@ -73,8 +73,8 @@ export const data = [
     precioOferta: 19990,
     price: 19990,
     quantity: 1,
-    img: "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=600&h=350&q=80",
-    imagen: "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=600&h=350&q=80"
+    img: "./img/fuente.jpg",
+    imagen: "./img/fuente.jpg"
   },
   {
     id: 6,
@@ -87,8 +87,8 @@ export const data = [
     precioOferta: 11990,
     price: 11990,
     quantity: 1,
-    img: "https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=600&h=350&q=80",
-    imagen: "https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=600&h=350&q=80"
+    img: "./img/arena.jpg",
+    imagen: "./img/arena.jpg"
   }
 ];
 
