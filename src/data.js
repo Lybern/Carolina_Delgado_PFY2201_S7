@@ -18,7 +18,12 @@ export const data = [
     price: 39990,
     quantity: 1,
     img: "./img/rascador.png",
-    imagen: "./img/rascador.png"
+    imagen: "./img/rascador.png",
+    especificaciones: {
+      medidas: "120 cm alto x 55 cm ancho x 45 cm profundidad",
+      material: "Madera natural de pino y sisal trenzado de 6mm de alto tráfico",
+      recomendacion: "Ideal para gatos activos que requieren desgastar uñas, trepar y tener un refugio en altura."
+    }
   },
   {
     id: 2,
@@ -32,7 +37,12 @@ export const data = [
     price: 22990,
     quantity: 1,
     img: "./img/alimento.jpg",
-    imagen: "./img/alimento.jpg"
+    imagen: "./img/alimento.jpg",
+    especificaciones: {
+      medidas: "Bolsa sellada al vacío de 3 kg",
+      material: "Salmón fresco (32%), arroz integral, taurina y complejo vitamínico A, D3, E",
+      recomendacion: "Fórmula de alta digestibilidad diseñada para proteger el tracto digestivo y evitar alergias."
+    }
   },
   {
     id: 3,
@@ -46,7 +56,12 @@ export const data = [
     price: 14990,
     quantity: 1,
     img: "./img/churu.jpg",
-    imagen: "./img/churu.jpg"
+    imagen: "./img/churu.jpg",
+    especificaciones: {
+      medidas: "Caja con 20 tubos individuales de 14g cada uno (280g netos)",
+      material: "Atún de aguas profundas, extracto de pollo campero y extracto de té verde",
+      recomendacion: "Aporte extra de hidratación (91% humedad) para prevenir problemas urinarios y premiar buenos hábitos."
+    }
   },
   {
     id: 4,
@@ -60,7 +75,12 @@ export const data = [
     price: 18990,
     quantity: 1,
     img: "./img/talia.jpg",
-    imagen: "./img/talia.jpg"
+    imagen: "./img/talia.jpg",
+    especificaciones: {
+      medidas: "50 cm de diámetro x 40 cm de altura (para gatos de hasta 8 kg)",
+      material: "Felpa ultra suave hipoalergénica con fondo antideslizante e impermeable",
+      recomendacion: "Aprobada por Talia para siestas reconfortantes en invierno, aliviando tensiones y dolores articulares."
+    }
   },
   {
     id: 5,
@@ -74,7 +94,12 @@ export const data = [
     price: 19990,
     quantity: 1,
     img: "./img/fuente.jpg",
-    imagen: "./img/fuente.jpg"
+    imagen: "./img/fuente.jpg",
+    especificaciones: {
+      medidas: "Capacidad de 2.5 Litros / Bomba USB silenciosa menor a 20 dB",
+      material: "Resina antibacteriana libre de BPA y cerámica sanitaria de grado alimenticio",
+      recomendacion: "Incentiva el consumo de agua corriente en felinos reticentes, reduciendo el riesgo de fallo renal."
+    }
   },
   {
     id: 6,
@@ -88,7 +113,12 @@ export const data = [
     price: 11990,
     quantity: 1,
     img: "./img/arena.jpg",
-    imagen: "./img/arena.jpg"
+    imagen: "./img/arena.jpg",
+    especificaciones: {
+      medidas: "Saco resistente de 10 kg con asa ergonómica reforzada",
+      material: "Bentonita sódica natural de grano fino (99.9% libre de polvo) con lavanda",
+      recomendacion: "Aglomera en solo 3 segundos formando terrones sólidos fáciles de retirar sin desarmarse."
+    }
   }
 ];
 
