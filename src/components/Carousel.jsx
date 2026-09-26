@@ -23,13 +23,6 @@ export const Carousel = () => {
       bajada: 'Espacios suaves, térmicos y acogedores diseñados para un sueño profundo.',
       alt: 'Gatita Talia en su cama térmica',
     },
-    {
-      id: 3,
-      img: './img/rascador.png',
-      titulo: 'Rascadores, Torres & Nutrición 🐟',
-      bajada: 'Los mejores alimentos y accesorios interactivos al mejor precio.',
-      alt: 'Rascador Castillo y torres felinas',
-    },
   ];
 
   // Efecto para la rotación automática del carrusel cada 3.5 segundos
