@@ -1,12 +1,8 @@
 // ==========================================================================
-// CATÁLOGO DE PRODUCTOS FELIMIAU - SEMANA 7 (REACT)
-// Compatible con el video tutorial y con la pauta de evaluación Duoc UC:
-// - nameProduct / nombre
-// - price / precioOferta
-// - precioNormal
-// - descripcion
-// - img / imagen
-// - quantity: cantidad inicial (1) para el carrito de compras
+// CATÁLOGO DE PRODUCTOS FELIMIAU (DATASET)
+// Estructura de datos para la tienda de comercio electrónico.
+// Cada objeto contiene identificador único, nombres, precios, imágenes,
+// descripciones y propiedad quantity para la gestión del carrito de compras.
 // ==========================================================================
 
 export const data = [

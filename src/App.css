@@ -1,7 +1,6 @@
 /* ==========================================================================
    FELIMIAU - ESTILOS VISUALES EXTERNOS (CSS MODULAR)
    Desarrollado por: Carolina Delgado
-   Asignatura: Desarrollo Frontend I (PFY2201) - Semana 7
    ========================================================================== */
 
 /* Variables de color personalizadas para la identidad de Felimiau */
@@ -23,7 +22,7 @@ body {
 }
 
 /* ==========================================================================
-   ESTILOS DEL HEADER (ESTRUCTURA DEL TUTORIAL + FELIMIAU)
+   ESTILOS DEL HEADER
    ========================================================================== */
 .header-tutorial {
   background-color: #FFFFFF;
@@ -51,10 +50,12 @@ body {
   letter-spacing: -0.5px;
 }
 
+/* Contenedor relativo que sirve de punto de anclaje para la ventana absoluta del carrito */
 .container-icon {
   position: relative;
 }
 
+/* Botón interactivo contenedor del icono SVG del carrito */
 .container-cart-icon {
   position: relative;
   cursor: pointer;
@@ -71,6 +72,7 @@ body {
   transform: scale(1.05);
 }
 
+/* Gráfico SVG de la bolsa de compras */
 .icon-cart {
   width: 38px;
   height: 38px;
@@ -78,6 +80,7 @@ body {
   stroke: var(--felimiau-oscuro);
 }
 
+/* Burbuja indicadora con la cantidad total de artículos sobre el icono */
 .count-products {
   position: absolute;
   top: 2px;
@@ -102,8 +105,10 @@ body {
 }
 
 /* ==========================================================================
-   ESTILOS DE LA VENTANITA DESPLEGABLE DEL CARRITO (TUTORIAL + FELIMIAU)
+   ESTILOS DE LA VENTANITA DESPLEGABLE DEL CARRITO
    ========================================================================== */
+
+/* Ventana flotante: Se posiciona de forma absoluta justo debajo del icono del carrito */
 .container-cart-products {
   position: absolute;
   top: 50px;
@@ -118,15 +123,18 @@ body {
   transition: all 0.2s ease;
 }
 
+/* Clase de utilidad para ocultar la ventana cuando el estado 'active' es false */
 .hidden-cart {
   display: none !important;
 }
 
+/* Contenedor con barra de desplazamiento vertical para cuando hay múltiples productos */
 .row-product {
   max-height: 320px;
   overflow-y: auto;
 }
 
+/* Fila individual que representa cada producto dentro del carrito */
 .cart-product {
   display: flex;
   align-items: center;
@@ -142,6 +150,7 @@ body {
   flex: 0.88;
 }
 
+/* Badge con la cantidad de unidades añadidas de un producto */
 .cantidad-producto-carrito {
   font-weight: 700;
   font-size: 14px;
@@ -166,6 +175,7 @@ body {
   color: var(--felimiau-dorado-oscuro);
 }
 
+/* Icono SVG de cruz (✕) para remover un producto del carrito */
 .icon-close {
   width: 22px;
   height: 22px;
@@ -182,6 +192,7 @@ body {
   transform: scale(1.15);
 }
 
+/* Bloque inferior que resume el total a pagar */
 .cart-total {
   display: flex;
   justify-content: space-between;
@@ -202,6 +213,7 @@ body {
   color: var(--felimiau-dorado-oscuro);
 }
 
+/* Mensaje informativo cuando el carrito no contiene artículos */
 .cart-empty {
   padding: 30px 20px;
   text-align: center;
@@ -210,7 +222,10 @@ body {
   margin: 0;
 }
 
-/* Botón Vaciar Carrito (exactamente como en la captura del tutorial) */
+/* Botón 'Vaciar Carrito':
+   - border: none para quitar el estilo predeterminado del navegador
+   - display: block y width: 100% para ocupar todo el ancho del desplegable
+   - border-bottom-left-radius y border-bottom-right-radius para encajar con las esquinas del contenedor */
 .btn-clear-all {
   border: none;
   background-color: var(--felimiau-oscuro);
@@ -233,8 +248,10 @@ body {
 }
 
 /* ==========================================================================
-   ESTILOS DEL CATÁLOGO DE PRODUCTOS (ESTRUCTURA DEL TUTORIAL)
+   ESTILOS DEL CATÁLOGO DE PRODUCTOS (GRID RESPONSIVE)
    ========================================================================== */
+
+/* Grid automático responsivo: se adapta al ancho de pantalla disponible */
 .container-items {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -244,6 +261,7 @@ body {
   padding: 0 20px;
 }
 
+/* Tarjeta individual de producto */
 .item {
   border-radius: 12px;
   background-color: #FFFFFF;
@@ -321,6 +339,7 @@ body {
   margin: 0;
 }
 
+/* Botón interactivo para añadir producto al carrito */
 .info-product button {
   border: none;
   background-color: var(--felimiau-oscuro);
@@ -341,11 +360,16 @@ body {
 }
 
 /* ==========================================================================
-   RESPONSIVE
+   ADAPTACIÓN RESPONSIVE PARA DISPOSITIVOS MÓVILES
    ========================================================================== */
 @media (max-width: 768px) {
   .container-items {
     grid-template-columns: 1fr;
     padding: 0 15px;
+  }
+
+  .container-cart-products {
+    width: 320px;
+    right: -10px;
   }
 }
