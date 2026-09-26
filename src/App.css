@@ -17,76 +17,196 @@ body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: var(--felimiau-oscuro);
   background-color: var(--felimiau-fondo);
-  margin: 0;
-  padding: 0;
 }
 
-/* ==========================================================================
-   ESTILOS DEL HEADER
-   ========================================================================== */
-.header-tutorial {
-  background-color: #FFFFFF;
-  border-bottom: 2px solid var(--felimiau-dorado);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+/* --------------------------------------------------------------------------
+   1. Carrusel Accesible y Responsivo
+   -------------------------------------------------------------------------- */
+.carousel-item {
+  background-color: var(--felimiau-amarillo-suave);
+  height: 460px;
+  text-align: center;
 }
 
-.header-container-inner {
-  max-width: 1200px;
+.carousel-item img {
+  height: 460px;
+  width: auto !important;
+  max-width: 100%;
+  object-fit: contain;
   margin: 0 auto;
-  padding: 18px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
-.header-brand-title {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: var(--felimiau-oscuro);
-  margin: 0;
-  letter-spacing: -0.5px;
+.carousel-caption {
+  bottom: 30px;
+  left: 10%;
+  right: 10%;
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(6px);
+  border-radius: 8px;
+  padding: 16px 24px;
+  border: 2px solid var(--felimiau-dorado);
 }
 
-/* Contenedor relativo que sirve de punto de anclaje para la ventana absoluta del carrito */
+.carousel-caption h2 {
+  color: var(--felimiau-dorado);
+  font-weight: 700;
+}
+
+.carousel-caption p {
+  color: #FFFFFF;
+  margin-bottom: 0;
+}
+
+.btn-carrusel-control {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+  background-color: rgba(30, 41, 59, 0.75);
+  color: #FFFFFF;
+  border: 1px solid var(--felimiau-dorado);
+  font-size: 0.85rem;
+  border-radius: 20px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-carrusel-control:hover,
+.btn-carrusel-control:focus {
+  background-color: var(--felimiau-dorado);
+  color: #000000;
+}
+
+@media (max-width: 768px) {
+  .carousel-item,
+  .carousel-item img {
+    height: 300px;
+  }
+  .carousel-caption {
+    bottom: 15px;
+    left: 5%;
+    right: 5%;
+    padding: 10px 14px;
+  }
+  .carousel-caption h2 {
+    font-size: 1.1rem;
+    margin-bottom: 2px;
+  }
+  .carousel-caption p {
+    font-size: 0.82rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Tarjetas de Productos (Card Producto Felimiau)
+   -------------------------------------------------------------------------- */
+.card-producto {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #FFFFFF;
+}
+
+.card-producto img {
+  height: 220px;
+  width: 100%;
+  object-fit: cover;
+  background-color: #F1F5F9;
+  transition: transform 0.3s ease;
+}
+
+.card-producto:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
+  border-color: var(--felimiau-dorado) !important;
+}
+
+.card-producto:hover img {
+  transform: scale(1.04);
+}
+
+/* --------------------------------------------------------------------------
+   3. Sección de Ofertas Especiales
+   -------------------------------------------------------------------------- */
+#seccion-ofertas {
+  border-left: 5px solid var(--felimiau-dorado);
+  background-color: #FEFCE8;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* --------------------------------------------------------------------------
+   4. Formulario de Contacto
+   -------------------------------------------------------------------------- */
+.form-contacto-card {
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.form-contacto-card .form-control:focus,
+.form-contacto-card .form-select:focus {
+  border-color: var(--felimiau-dorado-oscuro);
+  box-shadow: 0 0 0 0.25rem rgba(250, 204, 21, 0.25);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   5. Footer
+   -------------------------------------------------------------------------- */
+footer {
+  border-top: 3px solid var(--felimiau-dorado);
+}
+
+/* --------------------------------------------------------------------------
+   6. CARRITO DE COMPRAS FLOTANTE (INTEGRADO EN NAVBAR)
+   -------------------------------------------------------------------------- */
 .container-icon {
   position: relative;
 }
 
-/* Botón interactivo contenedor del icono SVG del carrito */
 .container-cart-icon {
   position: relative;
   cursor: pointer;
-  padding: 8px;
-  border-radius: 50%;
-  transition: all 0.2s ease;
+  padding: 6px 12px;
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1.5px solid var(--felimiau-dorado);
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
 }
 
 .container-cart-icon:hover {
-  background-color: var(--felimiau-amarillo-suave);
-  transform: scale(1.05);
+  background-color: var(--felimiau-dorado);
 }
 
-/* Gráfico SVG de la bolsa de compras */
-.icon-cart {
-  width: 38px;
-  height: 38px;
-  color: var(--felimiau-oscuro);
-  stroke: var(--felimiau-oscuro);
+.container-cart-icon:hover .icon-cart-svg {
+  color: #000000;
+  stroke: #000000;
 }
 
-/* Burbuja indicadora con la cantidad total de artículos sobre el icono */
+.icon-cart-svg {
+  width: 28px;
+  height: 28px;
+  color: var(--felimiau-dorado);
+  stroke: var(--felimiau-dorado);
+  transition: color 0.2s ease;
+}
+
 .count-products {
   position: absolute;
-  top: 2px;
-  right: 2px;
-  background-color: var(--felimiau-dorado);
-  color: var(--felimiau-oscuro);
+  top: -6px;
+  right: -6px;
+  background-color: #EF4444;
+  color: #FFFFFF;
   width: 22px;
   height: 22px;
   display: flex;
@@ -94,53 +214,45 @@ body {
   align-items: center;
   border-radius: 50%;
   font-weight: 800;
-  font-size: 12px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  border: 2px solid #FFFFFF;
+  font-size: 11px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  border: 2px solid #1E293B;
 }
 
 #contador-productos {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
 }
 
-/* ==========================================================================
-   ESTILOS DE LA VENTANITA DESPLEGABLE DEL CARRITO
-   ========================================================================== */
-
-/* Ventana flotante: Se posiciona de forma absoluta justo debajo del icono del carrito */
+/* Ventanita desplegable del carrito */
 .container-cart-products {
   position: absolute;
   top: 50px;
   right: 0;
   background-color: #FFFFFF;
-  width: 400px;
-  z-index: 99;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  width: 380px;
+  z-index: 1050;
   border-radius: 12px;
   border: 1px solid #E2E8F0;
   overflow: hidden;
-  transition: all 0.2s ease;
+  animation: fadeIn 0.2s ease-in-out;
 }
 
-/* Clase de utilidad para ocultar la ventana cuando el estado 'active' es false */
 .hidden-cart {
   display: none !important;
 }
 
-/* Contenedor con barra de desplazamiento vertical para cuando hay múltiples productos */
 .row-product {
-  max-height: 320px;
+  max-height: 300px;
   overflow-y: auto;
 }
 
-/* Fila individual que representa cada producto dentro del carrito */
 .cart-product {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
-  border-bottom: 1px solid #E2E8F0;
+  padding: 14px 18px;
+  border-bottom: 1px solid #F1F5F9;
 }
 
 .info-cart-product {
@@ -150,22 +262,21 @@ body {
   flex: 0.88;
 }
 
-/* Badge con la cantidad de unidades añadidas de un producto */
 .cantidad-producto-carrito {
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--felimiau-oscuro);
   background-color: var(--felimiau-amarillo-suave);
-  padding: 3px 8px;
+  padding: 2px 8px;
   border-radius: 6px;
   border: 1px solid var(--felimiau-dorado);
 }
 
 .titulo-producto-carrito {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--felimiau-oscuro);
-  margin: 0 10px;
+  margin: 0 8px;
   flex: 1;
 }
 
@@ -175,10 +286,9 @@ body {
   color: var(--felimiau-dorado-oscuro);
 }
 
-/* Icono SVG de cruz (✕) para remover un producto del carrito */
 .icon-close {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
   color: #94A3B8;
   stroke: #94A3B8;
@@ -192,28 +302,28 @@ body {
   transform: scale(1.15);
 }
 
-/* Bloque inferior que resume el total a pagar */
 .cart-total {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 20px 8px 20px;
+  padding: 16px 20px 8px 20px;
+  background-color: #F8FAFC;
+  border-top: 1px solid #E2E8F0;
 }
 
 .cart-total h3 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--felimiau-oscuro);
   margin: 0;
 }
 
 .total-pagar {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: var(--felimiau-dorado-oscuro);
 }
 
-/* Mensaje informativo cuando el carrito no contiene artículos */
 .cart-empty {
   padding: 30px 20px;
   text-align: center;
@@ -222,20 +332,13 @@ body {
   margin: 0;
 }
 
-/* Botón 'Vaciar Carrito':
-   - border: none para quitar el estilo predeterminado del navegador
-   - display: block y width: 100% para ocupar todo el ancho del desplegable
-   - border-bottom-left-radius y border-bottom-right-radius para encajar con las esquinas del contenedor */
 .btn-clear-all {
   border: none;
   background-color: var(--felimiau-oscuro);
   color: #FFFFFF;
-  padding: 15px 0;
+  padding: 14px 0;
   display: block;
   width: 100%;
-  margin-top: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
   cursor: pointer;
   font-weight: 700;
   font-size: 0.95rem;
@@ -247,129 +350,9 @@ body {
   color: #000000;
 }
 
-/* ==========================================================================
-   ESTILOS DEL CATÁLOGO DE PRODUCTOS (GRID RESPONSIVE)
-   ========================================================================== */
-
-/* Grid automático responsivo: se adapta al ancho de pantalla disponible */
-.container-items {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 26px;
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-/* Tarjeta individual de producto */
-.item {
-  border-radius: 12px;
-  background-color: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-.item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-  border-color: var(--felimiau-dorado);
-}
-
-.item figure {
-  margin: 0;
-  height: 220px;
-  overflow: hidden;
-  background-color: #F1F5F9;
-}
-
-.item figure img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.item:hover figure img {
-  transform: scale(1.05);
-}
-
-.info-product {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.info-product h2 {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--felimiau-oscuro);
-  margin-bottom: 8px;
-}
-
-.info-product .description {
-  font-size: 0.85rem;
-  color: var(--felimiau-texto-suave);
-  margin-bottom: 12px;
-  flex: 1;
-  line-height: 1.45;
-}
-
-.pricing-container {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
-.price-normal {
-  font-size: 0.88rem;
-  color: #94A3B8;
-  text-decoration: line-through;
-}
-
-.price {
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: var(--felimiau-dorado-oscuro);
-  margin: 0;
-}
-
-/* Botón interactivo para añadir producto al carrito */
-.info-product button {
-  border: none;
-  background-color: var(--felimiau-oscuro);
-  color: #FFFFFF;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  width: 100%;
-}
-
-.info-product button:hover {
-  background-color: var(--felimiau-dorado);
-  color: #000000;
-  transform: translateY(-1px);
-}
-
-/* ==========================================================================
-   ADAPTACIÓN RESPONSIVE PARA DISPOSITIVOS MÓVILES
-   ========================================================================== */
-@media (max-width: 768px) {
-  .container-items {
-    grid-template-columns: 1fr;
-    padding: 0 15px;
-  }
-
+@media (max-width: 576px) {
   .container-cart-products {
-    width: 320px;
-    right: -10px;
+    width: 300px;
+    right: -20px;
   }
 }

@@ -17,8 +17,8 @@ export const data = [
     precioOferta: 39990,
     price: 39990,
     quantity: 1,
-    img: "/img/rascador.png",
-    imagen: "/img/rascador.png"
+    img: "./img/rascador.png",
+    imagen: "./img/rascador.png"
   },
   {
     id: 2,
@@ -59,8 +59,8 @@ export const data = [
     precioOferta: 18990,
     price: 18990,
     quantity: 1,
-    img: "/img/talia.jpg",
-    imagen: "/img/talia.jpg"
+    img: "./img/talia.jpg",
+    imagen: "./img/talia.jpg"
   },
   {
     id: 5,
