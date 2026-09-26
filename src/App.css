@@ -44,6 +44,14 @@ body {
   text-align: center;
   overflow: hidden;
   background-color: #0F172A;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.45s ease-in-out;
+}
+
+.carousel-item.active {
+  display: block;
+  opacity: 1;
 }
 
 /* Imagen subyacente expandida con desenfoque que cubre el fondo */
@@ -59,6 +67,7 @@ body {
   filter: blur(28px) brightness(0.65);
   transform: scale(1.15);
   z-index: 1;
+  pointer-events: none;
 }
 
 /* Capa de contraste para resaltar la foto principal y los textos */
@@ -70,6 +79,7 @@ body {
   height: 100%;
   background: radial-gradient(circle at center, transparent 40%, rgba(15, 23, 42, 0.6) 100%);
   z-index: 2;
+  pointer-events: none;
 }
 
 /* Imagen principal centrada y nítida */
@@ -82,6 +92,23 @@ body {
   object-fit: contain;
   margin: 0 auto;
   filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.5));
+  pointer-events: none;
+}
+
+/* Asegurar que los controles y botones de navegación queden al frente y clickeables */
+.carousel-control-prev,
+.carousel-control-next {
+  z-index: 10 !important;
+  cursor: pointer;
+  width: 8%;
+}
+
+.carousel-indicators {
+  z-index: 10 !important;
+}
+
+.carousel-indicators button {
+  cursor: pointer;
 }
 
 .carousel-caption {

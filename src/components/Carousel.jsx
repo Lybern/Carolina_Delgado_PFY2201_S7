@@ -1,16 +1,60 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export const Carousel = () => {
+  // Estado para la diapositiva activa actual (0 = Blanquito, 1 = Talia, 2 = Rascador)
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Estado para pausar la rotación automática (Accesibilidad WCAG)
   const [pausado, setPausado] = useState(false);
+
+  // Definición de las diapositivas con sus recursos e información
+  const slides = [
+    {
+      id: 1,
+      img: './img/blanquito.jpg',
+      titulo: '¡Bienvenido a Felimiau! 🐾',
+      bajada: 'El rincón pensado exclusivamente para la felicidad y comodidad de tu gato.',
+      alt: 'Blanquito descansando en su rascador',
+    },
+    {
+      id: 2,
+      img: './img/talia.jpg',
+      titulo: 'Camas & Confort Térmico 💤',
+      bajada: 'Espacios suaves, térmicos y acogedores diseñados para un sueño profundo.',
+      alt: 'Gatita Talia en su cama térmica',
+    },
+    {
+      id: 3,
+      img: './img/rascador.png',
+      titulo: 'Rascadores, Torres & Nutrición 🐟',
+      bajada: 'Los mejores alimentos y accesorios interactivos al mejor precio.',
+      alt: 'Rascador Castillo y torres felinas',
+    },
+  ];
+
+  // Efecto para la rotación automática del carrusel cada 3.5 segundos
+  useEffect(() => {
+    if (pausado) return;
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [pausado, slides.length]);
+
+  // Funciones controladoras de avance y retroceso
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
 
   return (
     <section id="inicio" aria-label="Promociones y Novedades Felimiau" className="position-relative">
-      <div
-        id="carruselFelimiau"
-        className="carousel slide"
-        data-bs-ride={pausado ? 'false' : 'carousel'}
-        data-bs-interval="3000"
-      >
+      <div id="carruselFelimiau" className="carousel slide">
         {/* Botón de control de rotación para accesibilidad */}
         <button
           type="button"
@@ -21,99 +65,63 @@ export const Carousel = () => {
           {pausado ? '▶️ Reanudar' : '⏸️ Pausar'}
         </button>
 
-        {/* Indicadores */}
+        {/* Indicadores inferiores interactivos */}
         <div className="carousel-indicators">
-          <button
-            type="button"
-            data-bs-target="#carruselFelimiau"
-            data-bs-slide-to="0"
-            className="active"
-            aria-current="true"
-            aria-label="Diapositiva 1: Blanquito"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carruselFelimiau"
-            data-bs-slide-to="1"
-            aria-label="Diapositiva 2: Talia"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carruselFelimiau"
-            data-bs-slide-to="2"
-            aria-label="Diapositiva 3: Nutrición y Juguetes"
-          ></button>
+          {slides.map((slide, index) => (
+            <button
+              key={slide.id}
+              type="button"
+              className={index === currentSlide ? 'active' : ''}
+              aria-current={index === currentSlide ? 'true' : undefined}
+              aria-label={`Ir a diapositiva ${index + 1}: ${slide.titulo}`}
+              onClick={() => setCurrentSlide(index)}
+            ></button>
+          ))}
         </div>
 
         {/* Slides con imagen subyacente que cubre todo el ancho con desenfoque cinematográfico */}
         <div className="carousel-inner">
-          {/* Slide 1: Blanquito */}
-          <div className="carousel-item active" data-bs-interval="3500">
-            <div
-              className="carousel-bg-blur"
-              style={{ backgroundImage: 'url(./img/blanquito.jpg)' }}
-              aria-hidden="true"
-            ></div>
-            <div className="carousel-overlay"></div>
-            <img
-              src="./img/blanquito.jpg"
-              className="carousel-main-img d-block"
-              alt="Blanquito descansando en su rascador"
-              loading="eager"
-            />
-            <div className="carousel-caption d-block">
-              <h2 className="fw-bold">¡Bienvenido a Felimiau! 🐾</h2>
-              <p className="lead">El rincón pensado exclusivamente para la felicidad y comodidad de tu gato.</p>
-            </div>
-          </div>
+          {slides.map((slide, index) => {
+            const isActive = index === currentSlide;
+            return (
+              <div
+                key={slide.id}
+                className={`carousel-item ${isActive ? 'active' : ''}`}
+              >
+                {/* Capa subyacente desenfocada que cubre todo el ancho */}
+                <div
+                  className="carousel-bg-blur"
+                  style={{ backgroundImage: `url(${slide.img})` }}
+                  aria-hidden="true"
+                ></div>
 
-          {/* Slide 2: Talia */}
-          <div className="carousel-item" data-bs-interval="3500">
-            <div
-              className="carousel-bg-blur"
-              style={{ backgroundImage: 'url(./img/talia.jpg)' }}
-              aria-hidden="true"
-            ></div>
-            <div className="carousel-overlay"></div>
-            <img
-              src="./img/talia.jpg"
-              className="carousel-main-img d-block"
-              alt="Gatita Talia en su cama térmica"
-              loading="lazy"
-            />
-            <div className="carousel-caption d-block">
-              <h2 className="fw-bold">Camas & Confort Térmico 💤</h2>
-              <p className="lead">Espacios suaves, térmicos y acogedores diseñados para un sueño profundo.</p>
-            </div>
-          </div>
+                {/* Capa de contraste */}
+                <div className="carousel-overlay"></div>
 
-          {/* Slide 3: Rascador Castillo */}
-          <div className="carousel-item" data-bs-interval="3500">
-            <div
-              className="carousel-bg-blur"
-              style={{ backgroundImage: 'url(./img/rascador.png)' }}
-              aria-hidden="true"
-            ></div>
-            <div className="carousel-overlay"></div>
-            <img
-              src="./img/rascador.png"
-              className="carousel-main-img d-block"
-              alt="Rascadores y torres felinas"
-              loading="lazy"
-            />
-            <div className="carousel-caption d-block">
-              <h2 className="fw-bold">Rascadores, Torres & Nutrición 🐟</h2>
-              <p className="lead">Los mejores alimentos y accesorios interactivos al mejor precio.</p>
-            </div>
-          </div>
+                {/* Imagen principal centrada y nítida */}
+                <img
+                  src={slide.img}
+                  className="carousel-main-img d-block"
+                  alt={slide.alt}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                />
+
+                {/* Cuadro de texto flotante con borde dorado */}
+                <div className="carousel-caption d-block">
+                  <h2 className="fw-bold">{slide.titulo}</h2>
+                  <p className="lead">{slide.bajada}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Controles de navegación */}
+        {/* Controles de navegación manual anterior y siguiente */}
         <button
           className="carousel-control-prev"
           type="button"
-          data-bs-target="#carruselFelimiau"
-          data-bs-slide="prev"
+          onClick={prevSlide}
+          aria-label="Diapositiva anterior"
         >
           <span className="carousel-control-prev-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Anterior</span>
@@ -121,8 +129,8 @@ export const Carousel = () => {
         <button
           className="carousel-control-next"
           type="button"
-          data-bs-target="#carruselFelimiau"
-          data-bs-slide="next"
+          onClick={nextSlide}
+          aria-label="Diapositiva siguiente"
         >
           <span className="carousel-control-next-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Siguiente</span>
