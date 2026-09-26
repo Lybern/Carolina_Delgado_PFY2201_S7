@@ -45,15 +45,21 @@ export const Carousel = () => {
           ></button>
         </div>
 
-        {/* Slides */}
+        {/* Slides con imagen subyacente que cubre todo el ancho con desenfoque cinematográfico */}
         <div className="carousel-inner">
-          <div className="carousel-item active" data-bs-interval="3000">
+          {/* Slide 1: Blanquito */}
+          <div className="carousel-item active" data-bs-interval="3500">
+            <div
+              className="carousel-bg-blur"
+              style={{ backgroundImage: 'url(./img/blanquito.jpg)' }}
+              aria-hidden="true"
+            ></div>
+            <div className="carousel-overlay"></div>
             <img
               src="./img/blanquito.jpg"
-              className="d-block"
+              className="carousel-main-img d-block"
               alt="Blanquito descansando en su rascador"
-              width="1200"
-              height="460"
+              loading="eager"
             />
             <div className="carousel-caption d-block">
               <h2 className="fw-bold">¡Bienvenido a Felimiau! 🐾</h2>
@@ -61,13 +67,19 @@ export const Carousel = () => {
             </div>
           </div>
 
-          <div className="carousel-item" data-bs-interval="3000">
+          {/* Slide 2: Talia */}
+          <div className="carousel-item" data-bs-interval="3500">
+            <div
+              className="carousel-bg-blur"
+              style={{ backgroundImage: 'url(./img/talia.jpg)' }}
+              aria-hidden="true"
+            ></div>
+            <div className="carousel-overlay"></div>
             <img
               src="./img/talia.jpg"
-              className="d-block"
+              className="carousel-main-img d-block"
               alt="Gatita Talia en su cama térmica"
-              width="1200"
-              height="460"
+              loading="lazy"
             />
             <div className="carousel-caption d-block">
               <h2 className="fw-bold">Camas & Confort Térmico 💤</h2>
@@ -75,13 +87,19 @@ export const Carousel = () => {
             </div>
           </div>
 
-          <div className="carousel-item" data-bs-interval="3000">
+          {/* Slide 3: Rascador Castillo */}
+          <div className="carousel-item" data-bs-interval="3500">
+            <div
+              className="carousel-bg-blur"
+              style={{ backgroundImage: 'url(./img/rascador.png)' }}
+              aria-hidden="true"
+            ></div>
+            <div className="carousel-overlay"></div>
             <img
-              src="https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=1200&h=460&q=80"
-              className="d-block"
+              src="./img/rascador.png"
+              className="carousel-main-img d-block"
               alt="Rascadores y torres felinas"
-              width="1200"
-              height="460"
+              loading="lazy"
             />
             <div className="carousel-caption d-block">
               <h2 className="fw-bold">Rascadores, Torres & Nutrición 🐟</h2>

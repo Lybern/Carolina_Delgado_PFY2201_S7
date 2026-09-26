@@ -158,7 +158,7 @@ export const ProductList = ({
                         className="btn btn-outline-dark w-100 py-2 fw-semibold d-flex align-items-center justify-content-center gap-2"
                         onClick={() => setProductoModal(product)}
                       >
-                        <span>🔍</span> Ver detalles rápidos
+                        <span>📋</span> Ver detalles
                       </button>
                       <button
                         type="button"
