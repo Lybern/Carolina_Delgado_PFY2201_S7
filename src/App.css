@@ -102,6 +102,137 @@ body {
 }
 
 /* ==========================================================================
+   ESTILOS DE LA VENTANITA DESPLEGABLE DEL CARRITO (TUTORIAL + FELIMIAU)
+   ========================================================================== */
+.container-cart-products {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #FFFFFF;
+  width: 400px;
+  z-index: 99;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  border: 1px solid #E2E8F0;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.hidden-cart {
+  display: none !important;
+}
+
+.row-product {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.cart-product {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.info-cart-product {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0.88;
+}
+
+.cantidad-producto-carrito {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--felimiau-oscuro);
+  background-color: var(--felimiau-amarillo-suave);
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--felimiau-dorado);
+}
+
+.titulo-producto-carrito {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--felimiau-oscuro);
+  margin: 0 10px;
+  flex: 1;
+}
+
+.precio-producto-carrito {
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--felimiau-dorado-oscuro);
+}
+
+.icon-close {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  color: #94A3B8;
+  stroke: #94A3B8;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.icon-close:hover {
+  stroke: #EF4444;
+  color: #EF4444;
+  transform: scale(1.15);
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px 8px 20px;
+}
+
+.cart-total h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--felimiau-oscuro);
+  margin: 0;
+}
+
+.total-pagar {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--felimiau-dorado-oscuro);
+}
+
+.cart-empty {
+  padding: 30px 20px;
+  text-align: center;
+  color: var(--felimiau-texto-suave);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Botón Vaciar Carrito (exactamente como en la captura del tutorial) */
+.btn-clear-all {
+  border: none;
+  background-color: var(--felimiau-oscuro);
+  color: #FFFFFF;
+  padding: 15px 0;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-clear-all:hover {
+  background-color: var(--felimiau-dorado);
+  color: #000000;
+}
+
+/* ==========================================================================
    ESTILOS DEL CATÁLOGO DE PRODUCTOS (ESTRUCTURA DEL TUTORIAL)
    ========================================================================== */
 .container-items {
