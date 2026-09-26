@@ -116,12 +116,12 @@ export const Header = ({
                   />
                 </svg>
 
-                {/* Contador dinámico de unidades */}
-                <div className="count-products">
-                  <span id="contador-productos">
-                    {countProducts > 0 ? countProducts : allProducts.length}
-                  </span>
-                </div>
+                {/* Contador dinámico de unidades: se muestra solo cuando hay productos agregados */}
+                {countProducts > 0 && (
+                  <div className="count-products">
+                    <span id="contador-productos">{countProducts}</span>
+                  </div>
+                )}
               </div>
 
               {/* Ventana flotante desplegable del carrito */}
