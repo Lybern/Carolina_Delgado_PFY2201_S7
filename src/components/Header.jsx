@@ -19,6 +19,30 @@ export const Header = ({
     setAllProducts(results);
   };
 
+  // Manejador para aumentar en 1 la cantidad de un producto en el carrito
+  const onIncreaseQuantity = (product) => {
+    const updatedProducts = allProducts.map((item) =>
+      item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+    );
+    setTotal(total + product.price);
+    setCountProducts(countProducts + 1);
+    setAllProducts(updatedProducts);
+  };
+
+  // Manejador para disminuir en 1 la cantidad de un producto (o eliminar si llega a 0)
+  const onDecreaseQuantity = (product) => {
+    if (product.quantity > 1) {
+      const updatedProducts = allProducts.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity - 1 } : item
+      );
+      setTotal(total - product.price);
+      setCountProducts(countProducts - 1);
+      setAllProducts(updatedProducts);
+    } else {
+      onDeleteProduct(product);
+    }
+  };
+
   // Manejador para vaciar el carrito por completo
   const onCleanCart = () => {
     setAllProducts([]);
@@ -136,14 +160,36 @@ export const Header = ({
                       {allProducts.map((product) => (
                         <div className="cart-product" key={product.id}>
                           <div className="info-cart-product">
-                            <span className="cantidad-producto-carrito">
-                              {product.quantity}
-                            </span>
+                            {/* Selector interactivo de cantidad con botones [+] y [-] */}
+                            <div className="selector-cantidad-carrito">
+                              <button
+                                type="button"
+                                className="btn-cantidad-cart"
+                                onClick={() => onDecreaseQuantity(product)}
+                                title="Disminuir una unidad"
+                                aria-label={`Disminuir una unidad de ${product.nameProduct}`}
+                              >
+                                −
+                              </button>
+                              <span className="cantidad-producto-carrito">
+                                {product.quantity}
+                              </span>
+                              <button
+                                type="button"
+                                className="btn-cantidad-cart"
+                                onClick={() => onIncreaseQuantity(product)}
+                                title="Aumentar una unidad"
+                                aria-label={`Aumentar una unidad de ${product.nameProduct}`}
+                              >
+                                +
+                              </button>
+                            </div>
+
                             <p className="titulo-producto-carrito">
                               {product.nameProduct}
                             </p>
                             <span className="precio-producto-carrito">
-                              ${product.price.toLocaleString('es-CL')}
+                              ${(product.price * product.quantity).toLocaleString('es-CL')}
                             </span>
                           </div>
                           <svg
