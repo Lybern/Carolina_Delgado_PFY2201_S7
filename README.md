@@ -17,21 +17,10 @@ Proyecto desarrollado para la asignatura **Desarrollo Frontend I (PFY2201)** —
 ## 📋 Descripción de la Actividad
 En esta etapa se migró y enriqueció la tienda web **Felimiau** hacia el ecosistema **React con Vite**, estructurando componentes funcionales modulares, gestionando estados interactivos con Hooks (`useState`, `useEffect`) y añadiendo la experiencia completa de un **Carrito de Compras dinámico**, conservando la interfaz visual y la identidad de marca desarrollada en las entregas anteriores.
 
----
-
-## 📸 Evidencias de la Aplicación en Funcionamiento
-
-### 1. Catálogo de Productos y Carrito de Compras con Controles de Cantidad
-![Catálogo Felimiau y Carrito de Compras](docs/screenshots/catalogo_carrito.png)
-*Visualización de los filtros interactivos por categoría (Nav-Pills), tarjetas con precios normales tachados, ofertas destacadas y ventana flotante del carrito con botones de incremento/decremento (`+`/`-`) y recálculo dinámico de subtotales en pesos chilenos.*
-
-### 2. Carrusel Accesible con Fondo Ambiental Cinemático
-![Carrusel Felimiau](docs/screenshots/carrusel_inicio.png)
-*Carrusel con fotografías de los gatitos Blanquito y Talia, fondo ambiental con efecto desenfocado (`blur`), textos flotantes contrastados y botón WCAG de Pausa/Reanudación.*
 
 ---
 
-## 🚀 Funcionalidades Implementadas
+## Funcionalidades Implementadas
 
 ### 1. Catálogo de Productos Completo
 Cada producto se presenta con la información requerida por la pauta:
