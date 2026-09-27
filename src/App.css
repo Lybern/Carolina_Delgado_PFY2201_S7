@@ -464,3 +464,49 @@ footer {
     right: -20px;
   }
 }
+
+/* --------------------------------------------------------------------------
+   8. Botón Flotante Volver Arriba (Scroll to Top)
+   -------------------------------------------------------------------------- */
+.btn-scroll-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--felimiau-dorado);
+  color: #1E293B;
+  border: 2px solid var(--felimiau-dorado-oscuro);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1040;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: fadeIn 0.3s ease-in-out;
+  padding: 0;
+  line-height: 1;
+}
+
+.btn-scroll-top span:first-child {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.btn-scroll-top .arrow-up {
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1;
+  margin-top: -2px;
+}
+
+.btn-scroll-top:hover {
+  background-color: #FFFFFF;
+  color: #000000;
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 10px 25px rgba(250, 204, 21, 0.6) !important;
+  border-color: var(--felimiau-dorado);
+}
+

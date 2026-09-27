@@ -8,6 +8,7 @@ import { Services } from './components/Services';
 import { ContactForm } from './components/ContactForm';
 import { Footer } from './components/Footer';
 import { ToastNotification } from './components/ToastNotification';
+import { ScrollToTop } from './components/ScrollToTop';
 
 function App() {
   // Estado principal del carrito de compras
@@ -68,6 +69,9 @@ function App() {
         product={toastProduct}
         onClose={() => setToastProduct(null)}
       />
+
+      {/* 5. Botón flotante para volver arriba suavemente */}
+      <ScrollToTop />
     </div>
   );
 }
