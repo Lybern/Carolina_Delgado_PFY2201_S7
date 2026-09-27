@@ -15,7 +15,19 @@ Proyecto desarrollado para la asignatura **Desarrollo Frontend I (PFY2201)** —
 ---
 
 ## 📋 Descripción de la Actividad
-En esta etapa se migró y enriqueció la tienda web **Felimiau** hacia el ecosistema **React con Vite**, estructurando componentes funcionales modulares, gestionando estados interactivos con Hooks (`useState`) y añadiendo la experiencia completa de un **Carrito de Compras dinámico**, conservando la interfaz visual y la identidad de marca desarrollada en las entregas anteriores.
+En esta etapa se migró y enriqueció la tienda web **Felimiau** hacia el ecosistema **React con Vite**, estructurando componentes funcionales modulares, gestionando estados interactivos con Hooks (`useState`, `useEffect`) y añadiendo la experiencia completa de un **Carrito de Compras dinámico**, conservando la interfaz visual y la identidad de marca desarrollada en las entregas anteriores.
+
+---
+
+## 📸 Evidencias de la Aplicación en Funcionamiento
+
+### 1. Catálogo de Productos y Carrito de Compras con Controles de Cantidad
+![Catálogo Felimiau y Carrito de Compras](docs/screenshots/catalogo_carrito.png)
+*Visualización de los filtros interactivos por categoría (Nav-Pills), tarjetas con precios normales tachados, ofertas destacadas y ventana flotante del carrito con botones de incremento/decremento (`+`/`-`) y recálculo dinámico de subtotales en pesos chilenos.*
+
+### 2. Carrusel Accesible con Fondo Ambiental Cinemático
+![Carrusel Felimiau](docs/screenshots/carrusel_inicio.png)
+*Carrusel con fotografías de los gatitos Blanquito y Talia, fondo ambiental con efecto desenfocado (`blur`), textos flotantes contrastados y botón WCAG de Pausa/Reanudación.*
 
 ---
 
@@ -25,23 +37,27 @@ En esta etapa se migró y enriqueció la tienda web **Felimiau** hacia el ecosis
 Cada producto se presenta con la información requerida por la pauta:
 * **Nombre del producto:** Identificación clara del artículo felino.
 * **Precio normal:** Precio de lista tachado para evidenciar el descuento.
-* **Precio de oferta:** Precio destacado con el valor final de venta.
+* **Precio de oferta:** Precio destacado con el valor final de venta en CLP ($).
 * **Descripción resumida:** Detalles de materiales, beneficios y usos.
-* **Imagen del producto:** Fotos de alta calidad de los michis (Blanquito, Talia y productos de cuidado).
-* **Botón interactivo:** Acción directa para *"Añadir al carrito"*.
+* **Imagen del producto:** Fotos de alta calidad de los michis y productos de cuidado con ajuste `object-fit: contain` para evitar recortes.
+* **Filtros por categoría (Nav-Pills):** Botones redondeados de Bootstrap para filtrar en tiempo real entre *Todos*, *Rascadores*, *Nutrición*, *Snacks*, *Camas*, *Accesorios* e *Higiene*.
+* **Ficha Técnica Modal:** Botón *Ver detalles* en cada tarjeta que despliega una ventana modal de Bootstrap con dimensiones, composición química y recomendaciones veterinarias.
 
 ### 2. Gestión Integral del Carrito de Compras
 * **Agregar productos:** Añade artículos al carrito. Si el producto ya existe, incrementa su cantidad (`quantity`) sin generar filas duplicadas.
+* **Modificar unidades (`+` y `-`):** Botones interactivos en cada fila del carrito para aumentar o disminuir cantidades con recálculo automático de subtotales.
 * **Eliminar productos:** Botón con icono de cruz (`✕`) en cada fila para remover productos específicos recalculando el total y el contador.
-* **Contador dinámico:** Burbuja roja sobre el icono del carrito en el navbar que refleja en tiempo real la cantidad total de artículos.
+* **Contador dinámico condicional:** Burbuja roja que aparece únicamente cuando hay productos en el carrito, ocultando el número cero por defecto.
 * **Cálculo del total acumulado:** Suma matemática en pesos chilenos ($ CLP) de todos los productos y cantidades seleccionadas.
 * **Vaciar carrito:** Botón de acción global para restablecer el carrito a cero.
 * **Renderizado condicional:** Muestra el mensaje *"El carrito está vacío"* cuando no hay artículos agregados.
 
 ### 3. Interfaz Integral de Felimiau
 * **Navbar Sticky:** Barra de navegación superior con logotipo, enlaces de sección, buscador y carrito desplegable.
-* **Carrusel Accesible (WCAG):** Diapositivas con fotos reales de los gatitos, con botón de Pausar / Reanudar.
-* **Banner de Ofertas Especiales:** Sección interactiva con botón para mostrar u ocultar promociones de la semana.
+* **Carrusel Accesible (WCAG):** Controlado nativamente con React (`useState` + `useEffect`), rotación automática y botón de Pausar / Reanudar.
+* **Notificación Toast de Bootstrap:** Alerta flotante en la esquina inferior que confirma al usuario cada producto agregado al carrito.
+* **Botón Scroll to Top 🐾 ⬆️:** Botón flotante que aparece al descender y permite regresar al inicio de la página con desplazamiento suave.
+* **Banner de Ofertas Especiales:** Sección interactiva con botón para alternar dinámicamente promociones de la semana.
 * **Servicios & Beneficios:** Columnas informativas de despacho, calidad aprobada y pago seguro.
 * **Formulario de Contacto:** Formulario con validación de campos y mensaje de confirmación controlado con React.
 * **Footer Semántico:** Información de derechos reservados y autoría del proyecto.
@@ -52,18 +68,21 @@ Cada producto se presenta con la información requerida por la pauta:
 ```text
 src/
 ├── components/
-│   ├── Carousel.jsx       # Carrusel accesible de imágenes
-│   ├── ContactForm.jsx    # Formulario de contacto con estados en React
-│   ├── Footer.jsx         # Pie de página semántico
-│   ├── Header.jsx         # Navbar principal con menú y carrito desplegable
-│   ├── OffersBanner.jsx   # Banner interactivo de promociones
-│   ├── ProductList.jsx    # Catálogo de tarjetas de productos
-│   └── Services.jsx       # Sección de beneficios y servicios
-├── data.js                # Dataset de productos con precios, ofertas e imágenes
-├── App.jsx                # Componente principal con los estados globales
-├── App.css                # Estilos visuales personalizados de Felimiau
-├── index.css              # Reset base y variables de color
-└── main.jsx               # Punto de entrada de la aplicación React
+│   ├── Carousel.jsx           # Carrusel accesible controlado con React
+│   ├── ContactForm.jsx        # Formulario de contacto interactivo
+│   ├── Footer.jsx             # Pie de página semántico
+│   ├── Header.jsx             # Barra de navegación con carrito desplegable y botones +/-
+│   ├── OffersBanner.jsx       # Banner de ofertas especiales semanales
+│   ├── ProductDetailModal.jsx # Ventana modal con ficha técnica de cada producto
+│   ├── ProductList.jsx        # Catálogo de tarjetas con filtros Nav-Pills
+│   ├── ScrollToTop.jsx        # Botón flotante interactivo para volver arriba
+│   ├── Services.jsx           # Beneficios y garantías de Felimiau
+│   └── ToastNotification.jsx  # Notificación flotante de confirmación (Bootstrap Toast)
+├── data.js                    # Dataset oficial con precios, ofertas, fotos y especificaciones
+├── App.jsx                    # Componente raíz con el estado global del carrito
+├── App.css                    # Estilos visuales personalizados y responsive design
+├── index.css                  # Variables de color y tipografía base
+└── main.jsx                   # Punto de entrada de la aplicación en React
 ```
 
 ---
@@ -92,6 +111,6 @@ src/
 
 Para compilar y publicar en la rama `gh-pages`:
 ```bash
-npm run build
+npm run deploy
 ```
-La carpeta generada `dist` contiene los archivos listos para producción.
+La aplicación compila a la carpeta `dist` y se publica automáticamente en GitHub Pages.
