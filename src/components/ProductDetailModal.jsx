@@ -55,7 +55,7 @@ export const ProductDetailModal = ({ product, onClose, onAddToCart }) => {
                       src={product.img}
                       alt={product.nameProduct}
                       className="img-fluid rounded-2"
-                      style={{ maxHeight: '260px', width: '100%', objectFit: 'cover' }}
+                      style={{ maxHeight: '260px', width: '100%', objectFit: 'contain' }}
                     />
                   </div>
                 </div>

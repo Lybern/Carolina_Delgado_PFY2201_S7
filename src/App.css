@@ -185,10 +185,11 @@ body {
 }
 
 .card-producto img {
-  height: 240px;
+  height: 250px;
   width: 100%;
-  object-fit: cover;
-  background-color: #F1F5F9;
+  object-fit: contain;
+  background-color: #F8FAFC;
+  padding: 8px;
   transition: transform 0.3s ease;
 }
 
