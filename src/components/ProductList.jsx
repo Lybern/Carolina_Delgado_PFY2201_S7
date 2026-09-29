@@ -2,6 +2,22 @@ import { useState } from 'react';
 import { data } from '../data';
 import { ProductDetailModal } from './ProductDetailModal';
 
+/**
+ * Componente que renderiza el catálogo de productos de Felimiau.
+ * Gestiona el filtrado reactivo por categorías, búsqueda en tiempo real,
+ * la adición inmutable al carrito y la activación de fichas técnicas en modal.
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @param {Array<Object>} props.allProducts - Lista de productos en el carrito.
+ * @param {Function} props.setAllProducts - Setter para actualizar el array del carrito.
+ * @param {number} props.countProducts - Total de unidades agregadas.
+ * @param {Function} props.setCountProducts - Setter para actualizar las unidades.
+ * @param {number} props.total - Monto total acumulado en $ CLP.
+ * @param {Function} props.setTotal - Setter para actualizar el monto total.
+ * @param {Function} props.setToastProduct - Setter para activar la alerta Toast.
+ * @param {string} [props.searchTerm=''] - Término de búsqueda en tiempo real.
+ * @returns {JSX.Element} Sección del catálogo con filtros, cuadrícula y modal.
+ */
 export const ProductList = ({
   allProducts,
   setAllProducts,
@@ -10,6 +26,7 @@ export const ProductList = ({
   total,
   setTotal,
   setToastProduct,
+  searchTerm = '',
 }) => {
   // Estado para el filtro de categorías activo
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todos');
@@ -28,13 +45,22 @@ export const ProductList = ({
     'Higiene & Aseo',
   ];
 
-  // Lógica de filtrado en tiempo real según la categoría seleccionada
-  const productosFiltrados =
-    categoriaSeleccionada === 'Todos'
-      ? data
-      : data.filter((item) => item.categoria === categoriaSeleccionada);
+  // Lógica de filtrado reactivo en tiempo real combinando categoría y término de búsqueda
+  const productosFiltrados = data.filter((item) => {
+    const coincideCategoria =
+      categoriaSeleccionada === 'Todos' || item.categoria === categoriaSeleccionada;
+    const coincideBusqueda =
+      searchTerm.trim() === '' ||
+      item.nameProduct.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.descripcion.toLowerCase().includes(searchTerm.toLowerCase());
+    return coincideCategoria && coincideBusqueda;
+  });
 
-  // Función para gestionar la adición de productos al carrito sin duplicar
+  /**
+   * Gestiona la adición de productos al carrito de compras con inmutabilidad estricta.
+   * Si el producto ya existe en el carrito, incrementa su cantidad sin duplicar filas.
+   * @param {Object} product - Producto a agregar al carrito.
+   */
   const onAddProduct = (product) => {
     // Disparar notificación visual flotante (Toast)
     if (setToastProduct) {
@@ -55,7 +81,7 @@ export const ProductList = ({
       return setAllProducts([...products]);
     }
 
-    // 2. Flujo para productos nuevos en el carrito:
+    // 2. Flujo para productos nuevos en el carrito (concatenación inmutable con spread):
     setTotal(total + product.price * product.quantity);
     setCountProducts(countProducts + product.quantity);
     setAllProducts([...allProducts, product]);
@@ -180,6 +206,17 @@ export const ProductList = ({
               </div>
             );
           })}
+
+          {/* Mensaje amigable cuando la búsqueda o filtro no arroja resultados */}
+          {productosFiltrados.length === 0 && (
+            <div className="col-12 text-center py-5">
+              <p className="fs-1 mb-2">😿</p>
+              <h4 className="fw-bold text-dark">No se encontraron productos</h4>
+              <p className="text-muted">
+                No hay artículos que coincidan con "{searchTerm}". Intenta con otro término o categoría.
+              </p>
+            </div>
+          )}
         </div>
       </div>
 

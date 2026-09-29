@@ -1,3 +1,12 @@
+/**
+ * Componente modal accesible para visualización de ficha técnica y detalles del producto.
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @param {Object|null} props.product - Producto seleccionado para ver detalles técnicos.
+ * @param {Function} props.onClose - Función callback para cerrar el modal.
+ * @param {Function} props.onAddToCart - Función callback para añadir el producto al carrito.
+ * @returns {JSX.Element|null} Elemento modal interactivo o null si no hay producto activo.
+ */
 export const ProductDetailModal = ({ product, onClose, onAddToCart }) => {
   // Si no hay producto seleccionado, el componente no renderiza nada en el DOM
   if (!product) return null;
@@ -10,12 +19,11 @@ export const ProductDetailModal = ({ product, onClose, onAddToCart }) => {
     <>
       {/* Contenedor Modal de Bootstrap (activo y visible con d-block) */}
       <div
-        className="modal fade show d-block"
+        className="modal fade show d-block modal-dialog-custom"
         tabIndex="-1"
         role="dialog"
         aria-labelledby="modalDetallesTitulo"
         aria-modal="true"
-        style={{ zIndex: 1055 }}
       >
         <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
@@ -54,8 +62,7 @@ export const ProductDetailModal = ({ product, onClose, onAddToCart }) => {
                     <img
                       src={product.img}
                       alt={product.nameProduct}
-                      className="img-fluid rounded-2"
-                      style={{ maxHeight: '260px', width: '100%', objectFit: 'contain' }}
+                      className="img-fluid rounded-2 modal-product-img"
                     />
                   </div>
                 </div>
@@ -131,8 +138,7 @@ export const ProductDetailModal = ({ product, onClose, onAddToCart }) => {
 
       {/* Fondo oscuro translúcido (Backdrop) de Bootstrap con cierre al hacer clic fuera */}
       <div
-        className="modal-backdrop fade show"
-        style={{ zIndex: 1050 }}
+        className="modal-backdrop fade show modal-backdrop-custom"
         onClick={onClose}
       ></div>
     </>

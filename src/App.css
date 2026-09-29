@@ -511,3 +511,31 @@ footer {
   border-color: var(--felimiau-dorado);
 }
 
+/* --------------------------------------------------------------------------
+   9. Clases Centralizadas de Modal y Toast (Sustitución de Estilos Inline)
+   -------------------------------------------------------------------------- */
+.modal-dialog-custom {
+  z-index: 1055;
+}
+
+.modal-product-img {
+  max-height: 260px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.modal-backdrop-custom {
+  z-index: 1050;
+}
+
+.toast-container-custom {
+  z-index: 1100;
+}
+
+.toast-thumb-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+}
+
+

@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react';
 
+/**
+ * Componente flotante que detecta el desplazamiento vertical de la ventana y
+ * muestra un botón interactivo con animación suave para retornar al encabezado.
+ * @component
+ * @returns {JSX.Element|null} Botón flotante o null si la posición es superior a 300px.
+ */
 export const ScrollToTop = () => {
   // Estado para controlar la visibilidad del botón según el desplazamiento vertical
   const [visible, setVisible] = useState(false);

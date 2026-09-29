@@ -1,5 +1,20 @@
 import { useState } from 'react';
 
+/**
+ * Componente Header que integra la barra de navegación superior,
+ * búsqueda reactiva en tiempo real y el menú flotante del carrito de compras.
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @param {Array<Object>} props.allProducts - Lista de productos actualmente en el carrito.
+ * @param {Function} props.setAllProducts - Setter para actualizar los productos del carrito.
+ * @param {number} props.total - Monto total acumulado en $ CLP.
+ * @param {number} props.countProducts - Cantidad total de unidades en el carrito.
+ * @param {Function} props.setCountProducts - Setter para actualizar la cantidad de unidades.
+ * @param {Function} props.setTotal - Setter para actualizar el monto total.
+ * @param {string} props.searchTerm - Cadena de texto de búsqueda en tiempo real.
+ * @param {Function} props.setSearchTerm - Setter para actualizar el término de búsqueda.
+ * @returns {JSX.Element} Barra de navegación y carrito desplegable.
+ */
 export const Header = ({
   allProducts = [],
   setAllProducts,
@@ -7,11 +22,16 @@ export const Header = ({
   countProducts = 0,
   setCountProducts,
   setTotal,
+  searchTerm = '',
+  setSearchTerm = () => {},
 }) => {
   // Estado local para alternar la visualización del menú flotante del carrito
   const [active, setActive] = useState(false);
 
-  // Manejador para eliminar un producto individual del carrito
+  /**
+   * Elimina un producto individual del carrito y descuenta sus valores del total y contador.
+   * @param {Object} product - Producto a eliminar.
+   */
   const onDeleteProduct = (product) => {
     const results = allProducts.filter((item) => item.id !== product.id);
     setTotal(total - product.price * product.quantity);
@@ -19,7 +39,10 @@ export const Header = ({
     setAllProducts(results);
   };
 
-  // Manejador para aumentar en 1 la cantidad de un producto en el carrito
+  /**
+   * Incrementa en 1 la cantidad de un producto existente en el carrito.
+   * @param {Object} product - Producto a incrementar.
+   */
   const onIncreaseQuantity = (product) => {
     const updatedProducts = allProducts.map((item) =>
       item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
@@ -29,7 +52,10 @@ export const Header = ({
     setAllProducts(updatedProducts);
   };
 
-  // Manejador para disminuir en 1 la cantidad de un producto (o eliminar si llega a 0)
+  /**
+   * Disminuye en 1 la cantidad de un producto, o lo elimina si la cantidad es 1.
+   * @param {Object} product - Producto a decrementar.
+   */
   const onDecreaseQuantity = (product) => {
     if (product.quantity > 1) {
       const updatedProducts = allProducts.map((item) =>
@@ -43,7 +69,9 @@ export const Header = ({
     }
   };
 
-  // Manejador para vaciar el carrito por completo
+  /**
+   * Restablece el carrito de compras a su estado vacío inicial.
+   */
   const onCleanCart = () => {
     setAllProducts([]);
     setTotal(0);
@@ -100,7 +128,7 @@ export const Header = ({
               </li>
             </ul>
 
-            {/* Buscador de productos */}
+            {/* Buscador de productos con reactividad en tiempo real */}
             <form
               className="d-flex me-3 my-2 my-lg-0"
               role="search"
@@ -111,6 +139,8 @@ export const Header = ({
                 type="search"
                 placeholder="Buscar producto..."
                 aria-label="Buscar producto para gatos"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
               <button className="btn btn-warning text-dark fw-bold" type="submit">
                 Buscar

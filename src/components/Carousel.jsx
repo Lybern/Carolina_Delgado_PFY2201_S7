@@ -1,5 +1,12 @@
 import { useState, useEffect } from 'react';
 
+/**
+ * Componente Carousel animado y accesible (cumple pautas WCAG 2.1).
+ * Implementa rotación automática cíclica con temporizador y botón de pausa/reanudación,
+ * además de una capa ambiental con efecto desenfocado cinemático.
+ * @component
+ * @returns {JSX.Element} Carrusel de novedades interactivo.
+ */
 export const Carousel = () => {
   // Estado para la diapositiva activa actual (0 = Blanquito, 1 = Talia, 2 = Rascador)
   const [currentSlide, setCurrentSlide] = useState(0);

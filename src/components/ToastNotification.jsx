@@ -1,5 +1,13 @@
 import { useEffect } from 'react';
 
+/**
+ * Componente de notificación contextual flotante (Bootstrap Toast) con temporizador automático.
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @param {Object|null} props.product - Producto recientemente añadido al carrito.
+ * @param {Function} props.onClose - Función callback para cerrar o descartar la notificación.
+ * @returns {JSX.Element|null} Notificación flotante activa o null si no hay producto.
+ */
 export const ToastNotification = ({ product, onClose }) => {
   // Temporizador para cerrar automáticamente la notificación después de 3.2 segundos
   useEffect(() => {
@@ -17,8 +25,7 @@ export const ToastNotification = ({ product, onClose }) => {
 
   return (
     <div
-      className="toast-container position-fixed bottom-0 end-0 p-3"
-      style={{ zIndex: 1100 }}
+      className="toast-container position-fixed bottom-0 end-0 p-3 toast-container-custom"
       aria-live="polite"
       aria-atomic="true"
     >
@@ -46,8 +53,7 @@ export const ToastNotification = ({ product, onClose }) => {
           <img
             src={product.img}
             alt={product.nameProduct}
-            className="rounded border border-secondary"
-            style={{ width: '48px', height: '48px', objectFit: 'cover' }}
+            className="rounded border border-secondary toast-thumb-img"
           />
           <div className="flex-grow-1">
             <p className="mb-0 fw-semibold text-warning small">{product.nameProduct}</p>
