@@ -25,7 +25,7 @@ En esta octava semana (*"Mejorando funcionalidades clave en el eCommerce con Rea
 
 ---
 
-## 🚀 Funcionalidades Clave de la Semana 8
+##  Funcionalidades Clave de la Semana 8
 
 ### 1. Manejo de Efectos y Carga Asíncrona (`useEffect`)
 * **Consumo de API REST / Backend:** La aplicación consulta dinámicamente los datos mediante el servicio desacoplado `productService.js`.
