@@ -55,7 +55,9 @@ export async function getProductos() {
 
       const fallbackResponse = await fetch(LOCAL_FALLBACK_URL);
       if (!fallbackResponse.ok) {
-        throw new Error(`Error HTTP al cargar JSON local: ${fallbackResponse.status}`);
+        throw new Error(`Error HTTP al cargar JSON local: ${fallbackResponse.status}`, {
+          cause: backendError,
+        });
       }
       const fallbackData = await fallbackResponse.json();
       console.log('✅ [productService] Productos cargados desde respaldo JSON local');
@@ -63,7 +65,8 @@ export async function getProductos() {
     } catch (fallbackError) {
       console.error('❌ [productService] Error crítico al cargar productos:', fallbackError);
       throw new Error(
-        'No se pudo conectar al servidor ni cargar los datos de respaldo. Por favor, verifica tu conexión.'
+        'No se pudo conectar al servidor ni cargar los datos de respaldo. Por favor, verifica tu conexión.',
+        { cause: fallbackError }
       );
     }
   }

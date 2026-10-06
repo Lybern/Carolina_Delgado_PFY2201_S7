@@ -4,32 +4,54 @@ import { Header } from './components/Header';
 import { Carousel } from './components/Carousel';
 import { OffersBanner } from './components/OffersBanner';
 import { ProductList } from './components/ProductList';
+import { ProductDetailModal } from './components/ProductDetailModal';
 import { Services } from './components/Services';
 import { ContactForm } from './components/ContactForm';
 import { Footer } from './components/Footer';
 import { ToastNotification } from './components/ToastNotification';
 import { ScrollToTop } from './components/ScrollToTop';
+import { getProductos } from './services/productService';
 
 /**
  * Componente raíz de la aplicación Felimiau.
- * Gestiona el estado global del carrito con persistencia en localStorage,
- * búsqueda reactiva en tiempo real y orquestación de componentes.
+ * Gestiona el estado global del catálogo, carrito de compras con persistencia en localStorage,
+ * efectos secundarios asíncronos con useEffect, renderizado condicional y orquestación
+ * centralizada de componentes y modal.
+ *
  * @component
  * @returns {JSX.Element} Aplicación completa renderizada.
  */
 function App() {
-  // Estado principal del carrito de compras con inicialización persistente desde localStorage
+  // ==========================================================================
+  // 1. ESTADOS PARA CARGA DINÁMICA DE PRODUCTOS (SEMANA 8)
+  // ==========================================================================
+  // Catálogo dinámico de productos traídos desde la API / backend
+  const [productos, setProductos] = useState([]);
+
+  // Estado booleano de carga para renderizado condicional del Spinner
+  const [cargando, setCargando] = useState(true);
+
+  // Estado para capturar mensajes de error en caso de fallo de red
+  const [error, setError] = useState(null);
+
+  // Estado centralizado para el producto visualizado en la ventana Modal (Semana 8)
+  const [productoSeleccionado, setProductoSeleccionado] = useState(null);
+
+  // ==========================================================================
+  // 2. ESTADOS DEL CARRITO DE COMPRAS Y BÚSQUEDA
+  // ==========================================================================
+  // Lista de productos en el carrito con persistencia en localStorage
   const [allProducts, setAllProducts] = useState(() => {
     try {
       const savedCart = localStorage.getItem('felimiau_cart');
       return savedCart ? JSON.parse(savedCart) : [];
-    } catch (error) {
-      console.error('Error al inicializar el carrito desde localStorage:', error);
+    } catch (err) {
+      console.error('Error al inicializar el carrito desde localStorage:', err);
       return [];
     }
   });
 
-  // Estado del total acumulado a pagar con persistencia
+  // Monto total acumulado en $ CLP con persistencia
   const [total, setTotal] = useState(() => {
     try {
       const savedTotal = localStorage.getItem('felimiau_cart_total');
@@ -39,7 +61,7 @@ function App() {
     }
   });
 
-  // Estado del número total de unidades en el carrito con persistencia
+  // Cantidad total de unidades añadidas al carrito con persistencia
   const [countProducts, setCountProducts] = useState(() => {
     try {
       const savedCount = localStorage.getItem('felimiau_cart_count');
@@ -49,11 +71,53 @@ function App() {
     }
   });
 
-  // Estado para la búsqueda en tiempo real
+  // Estado para el buscador reactivo en tiempo real
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Estado para la notificación Toast flotante de producto añadido
+  // Notificación flotante Toast al añadir producto
   const [toastProduct, setToastProduct] = useState(null);
+
+  // ==========================================================================
+  // 3. EFECTOS SECUNDARIOS (useEffect)
+  // ==========================================================================
+  /**
+   * Permite reintentar manualmente la carga de productos si ocurrió un error.
+   */
+  const reintentarCarga = () => {
+    setCargando(true);
+    setError(null);
+    getProductos()
+      .then((data) => {
+        setProductos(data);
+        setCargando(false);
+      })
+      .catch((err) => {
+        setError(err.message || 'Error al conectar con el servidor.');
+        setCargando(false);
+      });
+  };
+
+  // Carga inicial de datos al montar la aplicación
+  useEffect(() => {
+    let isMounted = true;
+    getProductos()
+      .then((data) => {
+        if (isMounted) {
+          setProductos(data);
+          setCargando(false);
+        }
+      })
+      .catch((err) => {
+        if (isMounted) {
+          setError(err.message || 'Error al conectar con el servidor.');
+          setCargando(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Sincronización continua de la persistencia en localStorage
   useEffect(() => {
@@ -61,14 +125,52 @@ function App() {
       localStorage.setItem('felimiau_cart', JSON.stringify(allProducts));
       localStorage.setItem('felimiau_cart_total', total.toString());
       localStorage.setItem('felimiau_cart_count', countProducts.toString());
-    } catch (error) {
-      console.error('Error al persistir el carrito en localStorage:', error);
+    } catch (err) {
+      console.error('Error al persistir el carrito en localStorage:', err);
     }
   }, [allProducts, total, countProducts]);
 
+  // ==========================================================================
+  // 4. FUNCIONES DE GESTIÓN DEL CARRITO
+  // ==========================================================================
+  /**
+   * Agrega un producto al carrito con inmutabilidad y cálculo de totales.
+   * @param {Object} product - Producto a agregar.
+   */
+  const onAddProduct = (product) => {
+    // Disparar notificación flotante Toast
+    setToastProduct(null);
+    setTimeout(() => setToastProduct(product), 60);
+
+    const precioUnitario = product.precioOferta || product.price;
+
+    // Si ya existe en el carrito, se incrementa la cantidad
+    if (allProducts.find((item) => item.id === product.id)) {
+      const updated = allProducts.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setTotal(total + precioUnitario);
+      setCountProducts(countProducts + 1);
+      setAllProducts(updated);
+      return;
+    }
+
+    // Si es nuevo en el carrito, se añade con cantidad 1
+    setTotal(total + precioUnitario);
+    setCountProducts(countProducts + 1);
+    setAllProducts([
+      ...allProducts,
+      {
+        ...product,
+        quantity: 1,
+        price: precioUnitario,
+      },
+    ]);
+  };
+
   return (
     <div className="d-flex flex-column min-vh-100">
-      {/* 1. Encabezado con barra de navegación completa de Felimiau, buscador y carrito */}
+      {/* 1. Encabezado con barra de navegación, buscador reactivo y carrito de compras */}
       <Header
         allProducts={allProducts}
         setAllProducts={setAllProducts}
@@ -82,41 +184,94 @@ function App() {
 
       {/* 2. Contenido Principal */}
       <main className="flex-grow-1">
-        {/* Sección Carrusel Accesible con fotos de Blanquito y Talia */}
+        {/* Carrusel de fotos accesibles */}
         <Carousel />
 
-        {/* Sección de Bienvenida y Banner Interactivo de Ofertas */}
+        {/* Banner de Bienvenida y Ofertas */}
         <OffersBanner />
 
-        {/* Sección del Catálogo de Productos con funcionalidad de Carrito y Búsqueda */}
-        <ProductList
-          allProducts={allProducts}
-          setAllProducts={setAllProducts}
-          total={total}
-          setTotal={setTotal}
-          countProducts={countProducts}
-          setCountProducts={setCountProducts}
-          setToastProduct={setToastProduct}
-          searchTerm={searchTerm}
-        />
+        {/* ==================================================================
+            RENDERIZADO CONDICIONAL DE ESTADOS DE CARGA, ERROR Y CATÁLOGO
+            ================================================================== */}
+        {/* Caso A: Cargando datos (Spinner de Bootstrap) */}
+        {cargando && (
+          <section className="py-5 bg-white text-center">
+            <div className="container py-5">
+              <div
+                className="spinner-border text-warning"
+                style={{ width: '3.5rem', height: '3.5rem' }}
+                role="status"
+              >
+                <span className="visually-hidden">Cargando productos...</span>
+              </div>
+              <h4 className="fw-bold text-dark mt-3">Cargando catálogo Felimiau...</h4>
+              <p className="text-muted small">
+                Consultando disponibilidad de productos con el backend...
+              </p>
+            </div>
+          </section>
+        )}
 
-        {/* Sección de Servicios y Beneficios de Felimiau */}
+        {/* Caso B: Error de conexión con botón interactivo de Reintento */}
+        {error && (
+          <section className="py-5 bg-white">
+            <div className="container py-4">
+              <div
+                className="alert alert-danger shadow-sm rounded-4 p-4 text-center max-w-lg mx-auto"
+                role="alert"
+              >
+                <div className="fs-1 mb-2">😿</div>
+                <h4 className="alert-heading fw-bold">
+                  No fue posible cargar el catálogo de productos
+                </h4>
+                <p className="mb-3 text-muted">{error}</p>
+                <button
+                  type="button"
+                  className="btn btn-danger px-4 py-2 fw-bold shadow-sm"
+                  onClick={reintentarCarga}
+                >
+                  🔄 Reintentar carga de productos
+                </button>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Caso C: Carga exitosa (Catálogo dinámico de productos) */}
+        {!cargando && !error && (
+          <ProductList
+            productos={productos}
+            allProducts={allProducts}
+            onAddProduct={onAddProduct}
+            onVerProducto={setProductoSeleccionado}
+            searchTerm={searchTerm}
+          />
+        )}
+
+        {/* Sección de Servicios */}
         <Services />
 
-        {/* Sección de Formulario de Contacto Interactivo con React */}
+        {/* Sección de Formulario de Contacto */}
         <ContactForm />
       </main>
 
       {/* 3. Pie de página de Felimiau */}
       <Footer />
 
-      {/* 4. Notificación visual flotante (Toast de Bootstrap) al añadir productos */}
+      {/* 4. MODAL CENTRALIZADO (SEMANA 8): Controlado por estado en App.jsx */}
+      <ProductDetailModal
+        product={productoSeleccionado}
+        onClose={() => setProductoSeleccionado(null)}
+        onAddToCart={onAddProduct}
+      />
+
+      {/* 5. Notificación visual flotante (Toast de Bootstrap) */}
       <ToastNotification
         product={toastProduct}
         onClose={() => setToastProduct(null)}
       />
 
-      {/* 5. Botón flotante para volver arriba suavemente */}
+      {/* 6. Botón flotante para volver arriba suavemente */}
       <ScrollToTop />
     </div>
   );
