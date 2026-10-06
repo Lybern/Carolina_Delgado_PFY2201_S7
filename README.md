@@ -9,9 +9,9 @@ Proyecto desarrollado para la asignatura **Desarrollo Frontend I (PFY2201)** —
 * **Asignatura:** Desarrollo Frontend I (PFY2201)
 * **Institución:** Duoc UC
 * **Tecnologías:** React 19, Vite, Node.js / Express, Bootstrap 5.3, JavaScript (ES6+), CSS Modular
-* **Repositorio GitHub:** [https://github.com/Lybern/Carolina_Delgado_PFY2201_S7](https://github.com/Lybern/Carolina_Delgado_PFY2201_S7)
-* **Pull Request Semana 8 (Merged):** [https://github.com/Lybern/Carolina_Delgado_PFY2201_S7/pull/1](https://github.com/Lybern/Carolina_Delgado_PFY2201_S7/pull/1)
-* **Despliegue en línea (GitHub Pages):** [https://lybern.github.io/Carolina_Delgado_PFY2201_S7/](https://lybern.github.io/Carolina_Delgado_PFY2201_S7/)
+* **Repositorio GitHub:** [https://github.com/Lybern/Carolina_Delgado_PFY2201_S7_S8](https://github.com/Lybern/Carolina_Delgado_PFY2201_S7_S8)
+* **Pull Request Semana 8 (Merged):** [https://github.com/Lybern/Carolina_Delgado_PFY2201_S7_S8/pull/1](https://github.com/Lybern/Carolina_Delgado_PFY2201_S7_S8/pull/1)
+* **Despliegue en línea (GitHub Pages):** [https://lybern.github.io/Carolina_Delgado_PFY2201_S7_S8/](https://lybern.github.io/Carolina_Delgado_PFY2201_S7_S8/)
 
 ---
 

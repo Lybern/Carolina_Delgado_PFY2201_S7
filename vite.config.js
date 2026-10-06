@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig(({ command }) => ({
   plugins: [react()],
-  base: command === 'build' ? '/Carolina_Delgado_PFY2201_S7/' : '/',
+  base: command === 'build' ? '/Carolina_Delgado_PFY2201_S7_S8/' : '/',
   server: {
     port: 5173,
   },
