@@ -6,6 +6,6 @@ export default defineConfig(({ command }) => ({
   plugins: [react()],
   base: command === 'build' ? '/Carolina_Delgado_PFY2201_S7/' : '/',
   server: {
-    port: 3000,
+    port: 5173,
   },
 }))
