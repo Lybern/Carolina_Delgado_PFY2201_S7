@@ -5,7 +5,18 @@ const productos = require('./data/productos.json');
 const app = express();
 app.use(cors());
 
+// Ruta raíz: redirige automáticamente a la API de productos
+app.get('/', (req, res) => {
+  res.redirect('/api/productos');
+});
+
+// Ruta principal requerida por la actividad
 app.get('/api/productos', (req, res) => {
+  res.status(200).json(productos);
+});
+
+// Ruta alternativa de conveniencia
+app.get('/productos', (req, res) => {
   res.status(200).json(productos);
 });
 
